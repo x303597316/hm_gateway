@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.page_div {
+    font-size: 16px;
+    font-family: "microsoft yahei";
+    color: #8c8c8c;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.page_div a {
+    min-width: 30px;
+    height: 28px;
+    text-align: center;
+    margin: 0 4px;
+    cursor: pointer;
+    line-height: 28px;
+    color: #8c8c8c;
+    font-size: 16px;
+    display: inline-block;
+}
+
+#firstPage,
+#lastPage {
+    width: 50px;
+    font-size: 16px;
+    color: #8c8c8c;
+}
+
+#prePage,
+#nextPage {
+    width: 70px;
+    font-size: 16px;
+    color: #8c8c8c;
+}
+
+.page_div .current {
+    color: #4394d0;
+    margin-top: 50px;
+}

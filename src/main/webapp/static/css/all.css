@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 14px 'Microsoft YaHei', '宋体', Tahoma, Arial, sans-serif;
+}
+
+/* 头部和主体框架 */
+.nav_top {
+    width: 100%;
+    margin: auto;
+}
+
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.content_top::after {
+    display: block;
+    clear: both;
+    content: '';
+    height: 0;
+    visibility: hidden;
+}
+
+.content_top {
+     width: 100%;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    zoom: 1;
+    margin-bottom: -30px;
+    color: #434343;
+}
+
+.home {
+    display: inline-block;
+    width: 29px;
+    height: 26px;
+    background: url(../images/home.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    margin-top: 2px;
+    margin-right: 8px;
+    margin-left: 10px;
+}
+
+.rig {
+    display: inline-block;
+    width: 14px;
+    height: 23px;
+    background: url(../images/rig.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    margin-top: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.content_top span {
+    float: left;
+}
+
+.content_nav::after {
+    display: block;
+    height: 0;
+    clear: both;
+    content: '';
+    visibility: hidden;
+}
+
+.content_nav {
+    width: 100%;
+    font-size: 20px;
+    zoom: 1;
+}
+
+.content_nav_left {
+    width: 248px;
+    height: 1309px;
+    float: left;
+    color: #434343;
+    padding: 30px 0 0 24px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #f6f6f6;
+
+   /* width: 230px;
+    height: 1100px;
+    background: #e3e3eb;
+    margin: 0;
+    padding: 0;
+    float: left;*/
+}
+
+.nav_left_texts {
+    /* padding-bottom: 40px; */
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.nav_left_textss {
+    font-size: 16px;
+    padding-left: 14px;
+    padding-bottom: 40px;
+    color: #5C9FD5;
+    display: none;
+    cursor: pointer;
+}
+
+.jiantou {
+    display: inline-block;
+    width: 8px;
+    height: 10px;
+    background: url(../images/jiantou.png) no-repeat;
+    background-size: 100%;
+}
+
+.content_nav_right {
+    width: 940px;
+    float: left;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+/* 底部 */
+.bottom {
+    width: 100%;
+    height: 200px;
+    margin: auto;
+    background: #1f2031;
+}
+
+.bottom_box {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 26px;
+    box-sizing: border-box;
+}
+
+.bottom_boxs {
+    font-size: 16px;
+    color: #666;
+    padding-top: 35px;
+}
+
+.bottom_boxs::after {
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    content: '';
+}
+
+.bottom_boxs {
+    width: 100%;
+    zoom: 1;
+}
+
+.bottom_boxs_p {
+    float: left;
+}
+
+.bottom_boxs_p1 {
+    float: right;
+}
+
+.bottom_boxs_p1 span {
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.bottom_boxss::after {
+    display: block;
+    visibility: hidden;
+    content: '';
+    clear: both;
+    height: 0;
+}
+
+.bottom_boxss {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    margin-top: 70px;
+    zoom: 1;
+}
+
+.bottom_boxss_sapn {
+    font-size: 16px;
+    color: #666;
+    float: left;
+    margin-right: 76px;
+}
+
+.dianhua {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: url(../images/phone.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    margin-right: 10px;
+}
+
+.dianhuas {
+    font-size: 22px;
+    color: #dc4d20;
+    float: left;
+    margin-right: 14px;
+}
+
+.bottom_boxss_sapn1 {
+    font-size: 16px;
+    color: #666;
+    float: left;
+    margin-right: 20px;
+}
+
+.wx {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: url(../images/wx.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    margin-right: 30px;
+}
+
+.qq {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: url(../images/QQ.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    margin-right: 30px;
+}
+
+.xl {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: url(../images/xl.png) no-repeat;
+    background-size: 100%;
+    float: left;
+}

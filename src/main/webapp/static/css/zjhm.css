@@ -1,0 +1,283 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0; }
+
+html, body {
+ font-family:"Microsoft YaHei";
+  width: 100%;
+  }
+
+em, i {
+  font-style: normal; }
+
+ul, li {
+  list-style-type: none; }
+
+strong {
+  font-weight: normal; }
+
+a {
+  text-decoration: none;
+  color: #969696;
+ font-family:"Microsoft YaHei"; }
+
+a:hover {
+  text-decoration: none; }
+
+.box {
+  width: 100%;
+  min-width: 1200px;
+  height: auto;
+  overflow: hidden; }
+.container{
+  min-width: 1200px;
+}
+.banner {
+  width: 100%;
+  min-width: 1200px;
+  height: 337px;
+  overflow: hidden;
+  background: url("../images/zjhmban.png") no-repeat;
+  background-size: 100% 100%; }
+.box .banner .banner1{
+   min-width: 1200px;
+}
+
+.contert {
+  min-width: 1200px; }
+
+.contert .row {
+  margin: 0;
+  padding: 0; }
+  .contert .row .right {
+    width:970px;
+    float: left;
+    margin: 0;
+    padding: 0; }
+    .contert .row .right .hmkj1 {
+      width: 690px;
+      height: 270px;
+      float: left;
+      margin-left:40px; }
+     .contert .row .right .hmkj1 h1{
+        font-size: 25px;
+        text-align:center;
+        margin-top: 45px;
+        margin-bottom: 30px;
+     }
+     .contert .row .right .hmkj1 p{
+        line-height: 33px; 
+        font-size: 16px;
+        text-indent: 28px;
+     }
+  .contert .row .ss1 {
+    float: right;
+    width:210px;
+    height:260px; }
+  .contert .row .cont {
+    margin-left: 40px;
+    float: left;
+ }
+    .contert .row .cont p {
+      line-height: 30px;
+      text-indent: 28px; }
+  .contert .row .kj {
+    width: 900px;
+    margin-left: 40px; }
+
+.hmfir {
+  width:230px;
+  height: 1386px;
+  background: #f6f6f6;
+  margin: 0;
+  padding: 0;
+  float: left; }
+  .hmfir .title {
+    margin-top: 34px;
+    font-size: 20px;
+    	    margin-left: 25px;
+     }
+    .hmfir .title a {
+      font-size: 16px;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: #434343; }
+    .hmfir .title span {
+    
+      font-size: 18px;
+      color: #434343;
+      font-size: 16px; }
+  .hmfir .hmzj {
+   
+    margin-left: 10px;
+    margin-top: -4px;
+    margin-right: -6px; 
+      width: 29px;
+    height: 26px;
+    }
+  .hmfir .gp {
+    color: #bcbabc;
+    float: right;
+    margin-right: 130px;
+    color: #777577;
+    margin-top: 55px; }
+  .hmfir .gs {
+    color: #bcbabc;
+    float: right;
+    margin-right: 45px;
+    color: #777577;
+    margin-top: 10px;
+    font-size: 22px; }
+  .hmfir .number1 {
+    font-size: 50px;
+    float: right;
+    margin-right: 25px;
+    color: #4394d0; }
+  .hmfir .gsgk {
+    float: right;
+    margin-top: 40px; }
+    .hmfir .gsgk h4 {
+      width: 200px;
+      height: 78px;
+      background: #4394d0;
+      color: #fff;
+      font-size: 24px;
+      line-height: 78px;
+      text-align: center;
+      border-radius: 50px 0 0 50px; 
+        margin-left: 20px;}
+    .hmfir .gsgk .a1 {
+         width: 165px;
+    height: 62px;
+    line-height: 62px;
+    text-align: center;
+    background: #d9d9e8;
+    margin-top: 16px;
+    margin-left: 55px;
+    font-size: 16px;
+    border-radius: 50px 0 0 50px; }
+      .hmfir .gsgk .a1 span {
+        font-size: 28px;
+        color: #4394d0; }
+    .hmfir .gsgk .a2 {
+          width: 180px;
+    height: 62px;
+    line-height: 62px;
+    text-align: center;
+    background: #d9d9e8;
+    margin-top: 16px;
+    margin-left: 40px;
+    font-size: 16px;
+    border-radius: 50px 0 0 50px; }
+      .hmfir .gsgk .a2 span {
+        font-size: 28px;
+        color: #4394d0; }
+  .hmfir .ppjz {
+    float: right;
+    margin-top: 26px; }
+    .hmfir .ppjz h4 {
+      width: 200px;
+      height: 78px;
+      margin-left: 42px;
+      background: #4394d0;
+      color: #fff;
+      font-size: 24px;
+      line-height: 78px;
+      text-align: center;
+      border-radius: 50px 0 0 50px; }
+    .hmfir .ppjz .a1 {
+      width: 215px;
+      height: 62px;
+      line-height: 62px;
+      text-align: center;
+      background: #d9d9e8;
+      margin-top: 16px;
+      font-size: 16px;
+      margin-left: 28px;
+      border-radius: 50px 0 0 50px; }
+      .hmfir .ppjz .a1 span {
+        font-size: 28px;
+        color: #4394d0; }
+    .hmfir .ppjz .a2 {
+      width: 222px;
+      height: 62px;
+      line-height: 62px;
+      text-align: center;
+      background: #d9d9e8;
+      margin-top: 16px;
+      margin-left: 20px;
+      font-size: 16px;
+      border-radius: 50px 0 0 50px; }
+      .hmfir .ppjz .a2 span {
+        font-size: 28px;
+        color: #4394d0; }
+    .hmfir .ppjz .a3 {
+      width: 222px;
+      height: 62px;
+      line-height: 62px;
+      text-align: center;
+      background: #d9d9e8;
+      margin-top: 16px;
+      margin-left: 21px;
+      font-size: 16px;
+      border-radius: 50px 0 0 50px; }
+      .hmfir .ppjz .a3 span {
+        font-size: 28px;
+        color: #4394d0; }
+  .hmfir .qyry {
+    float: right;
+    margin-top: 26px; }
+    .hmfir .qyry h4 {
+      width: 200px;
+      height: 78px;
+      background: #4394d0;
+      color: #fff;
+      margin-left: 63px;
+      font-size: 24px;
+      line-height: 78px;
+      text-align: center;
+      border-radius: 50px 0 0 50px; }
+    .hmfir .qyry .a1 {
+      width: 220px;
+      height: 62px;
+      line-height: 62px;
+      text-align: center;
+      background: #d9d9e8;
+      margin-top: 16px;
+      font-size: 14px;
+      margin-left: 43px;
+      border-radius: 50px 0 0 50px; }
+      .hmfir .qyry .a1 span {
+        font-size: 28px;
+        color: #4394d0; }
+    .hmfir .qyry .a2 {
+      width: 200px;
+      height: 62px;
+      line-height: 62px;
+      text-align: center;
+      background: #d9d9e8;
+      margin-top: 16px;
+      margin-left: 63px;
+      font-size: 14px;
+      border-radius: 50px 0 0 50px; }
+      .hmfir .qyry .a2 span {
+        font-size: 28px;
+        color: #4394d0; }
+    .hmfir .qyry .a3 {
+      width: 200px;
+      height: 62px;
+      line-height: 62px;
+      text-align: center;
+      background: #d9d9e8;
+      margin-top: 16px;
+      margin-left: 63px;
+      font-size: 16px;
+      border-radius: 50px 0 0 50px; }
+      .hmfir .qyry .a3 span {
+        font-size: 28px;
+        color: #4394d0; }
+

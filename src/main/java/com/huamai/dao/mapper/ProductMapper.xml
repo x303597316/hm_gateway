@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="productName" property="productname" jdbcType="VARCHAR" />
+    <result column="detail" property="describe" jdbcType="VARCHAR" />
+    <result column="point" property="point" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, productName, detail, point, summary, status, parentid, img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from tb_product 
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huamai.entity.Product" >
+    insert into tb_product (id, productName, detail, 
+      point, summary, status, 
+      parentid, img)
+    values (#{id,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{point,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huamai.entity.Product" >
+    insert into tb_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productname != null" >
+        productName,
+      </if>
+      <if test="describe != null" >
+        detail,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huamai.entity.Product" >
+    update tb_product
+    <set >
+      <if test="productname != null" >
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        detail = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huamai.entity.Product" >
+    update tb_product
+    set productName = #{productname,jdbcType=VARCHAR},
+      detail = #{describe,jdbcType=VARCHAR},
+      point = #{point,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectList" parameterType="java.util.Map" resultMap="BaseResultMap">
+     SELECT t1.* FROM tb_product t1 WHERE t1.`status` = 1 
+     <if test="productName != '' and productName != null ">and productName like '%${productName}%'</if>
+  </select>
+  <select id="selectByParent" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	select count(id) from tb_product t1 WHERE t1.`status` = 1 and parentid=#{pid}
+  </select>
+  <select id="selectChild" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select * from tb_product t1 WHERE t1.`status` = 1 and parentid=#{id}
+  </select>
+  <select id="selectlist" resultMap="BaseResultMap">
+  	SELECT t1.* FROM tb_product t1 WHERE t1.`status` = 1 
+  </select>
+  
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.RelationMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.Relation" >
+    <result column="relationId" property="relationid" jdbcType="INTEGER" />
+    <result column="productId" property="productid" jdbcType="INTEGER" />
+    <result column="solutionId" property="solutionid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMap" type="java.util.Map" >
+    <result column="relationId" property="relationid" jdbcType="INTEGER" />
+    <result column="productId" property="productid" jdbcType="INTEGER" />
+    <result column="productName" jdbcType="VARCHAR" property="productname"/>
+    <result column="solutionId" property="solutionid" jdbcType="INTEGER" />
+    <result column="solutionName" jdbcType="VARCHAR" property="solutionname"/>
+  </resultMap>
+  <resultMap type="com.huamai.entity.Product" id="productlist">
+  	<result column="id" property="id" jdbcType="INTEGER" />
+  	<result column="productName" jdbcType="VARCHAR" property="productname"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.huamai.entity.Relation" >
+    insert into tb_solu_pro_relation (relationId, productId, solutionId
+      )
+    values (#{relationid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{solutionid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectBysolution" parameterType="java.util.Map" resultMap="ResultMap">
+  	select A.relationId,A.productId,B.productName,A.solutionId,C.solutionName from tb_solu_pro_relation A left join tb_product B on A.productId=B.id left join tb_solution C on C.id=A.solutionId where A.solutionId = #{solutionId}
+  </select>
+  <delete id="drop">
+  	delete from tb_solu_pro_relation where relationId=#{id}
+  </delete>
+  <select id="selectProduct" parameterType="java.lang.Integer" resultMap="productlist">
+  	select p.id,p.productName from tb_solu_pro_relation r,tb_product p where p.id = r.productId and r.solutionId=#{id}
+  </select>
+  <select id="selectDistinct" parameterType="com.huamai.entity.Relation" resultMap="BaseResultMap">
+  	select * from tb_solu_pro_relation where solutionId = #{solutionid} and productId = #{productid}
+  </select>
+</mapper>

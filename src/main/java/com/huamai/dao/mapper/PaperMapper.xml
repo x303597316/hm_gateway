@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.PaperMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.Paper" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="paperSize" property="papersize" jdbcType="VARCHAR" />
+    <result column="paperName" property="papername" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="VARCHAR" />
+    <result column="paperType" property="papertype" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="paperUrl" property="paperurl" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="parperContent" property="parperContent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, paperSize, paperName, createTime, updateTime, paperType, introduce, paperUrl, 
+    type, title,parperContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_paper
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllPaper" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select 
+    *
+    from tb_paper
+    <where>
+   	<if test="papername != null  and papername != ''">and paperName like '%${papername}%'</if>
+   	<if test="type != null  and type != ''">and type=#{type} </if>
+   	<if test="start !=null and start != '' ">and date_format(updatetime,'%Y-%m-%d') <![CDATA[>= ]]>str_to_date(#{start}, '%Y-%m-%d') </if>
+   	<if test="end !=null and end != '' ">and date_format(updatetime,'%Y-%m-%d') <![CDATA[<= ]]> str_to_date(#{end}, '%Y-%m-%d')</if>
+    </where>
+    order by id desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_paper
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huamai.entity.Paper" >
+    insert into tb_paper (id, paperSize, paperName, 
+      createTime, updateTime, paperType, 
+      introduce, paperUrl, type, 
+      title,parperContent)
+    values (#{id,jdbcType=INTEGER}, #{papersize,jdbcType=VARCHAR}, #{papername,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=VARCHAR}, #{updatetime,jdbcType=VARCHAR}, #{papertype,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR}, #{paperurl,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR},#{parperContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huamai.entity.Paper" >
+    insert into tb_paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="papersize != null" >
+        paperSize,
+      </if>
+      <if test="papername != null" >
+        paperName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="papertype != null" >
+        paperType,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="paperurl != null" >
+        paperUrl,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="parperContent!=null">
+      	parperContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="papersize != null" >
+        #{papersize,jdbcType=VARCHAR},
+      </if>
+      <if test="papername != null" >
+        #{papername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="papertype != null" >
+        #{papertype,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="paperurl != null" >
+        #{paperurl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="parperContent!=null">
+      	#{parperContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huamai.entity.Paper" >
+    update tb_paper
+    <set >
+      <if test="papersize != null" >
+        paperSize = #{papersize,jdbcType=VARCHAR},
+      </if>
+      <if test="papername != null" >
+        paperName = #{papername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="papertype != null" >
+        paperType = #{papertype,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="paperurl != null" >
+        paperUrl = #{paperurl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="parperContent!=null">
+      	parperContent = #{parperContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huamai.entity.Paper" >
+    update tb_paper
+    set paperSize = #{papersize,jdbcType=VARCHAR},
+      paperName = #{papername,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=VARCHAR},
+      paperType = #{papertype,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      paperUrl = #{paperurl,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      parperContent = #{parperContent,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

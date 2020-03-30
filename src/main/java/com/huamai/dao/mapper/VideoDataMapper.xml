@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.VideoDataMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.VideoData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="videoName" property="videoname" jdbcType="VARCHAR" />
+    <result column="videoUrl" property="videourl" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, videoName, videoUrl, introduce
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from tb_video
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllVideo" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select 
+    *
+    from tb_video
+    <where>
+    <if test="term!=null">
+	and (videoName like '%${term}%' 
+	or introduce like '%${term}%')
+	</if>
+    </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_video
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huamai.entity.VideoData" >
+    insert into tb_video (id, videoName, videoUrl, 
+      introduce)
+    values (#{id,jdbcType=INTEGER}, #{videoname,jdbcType=VARCHAR}, #{videourl,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huamai.entity.VideoData" >
+    insert into tb_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="videoname != null" >
+        videoName,
+      </if>
+      <if test="videourl != null" >
+        videoUrl,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="videoname != null" >
+        #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="videourl != null" >
+        #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huamai.entity.VideoData" >
+    update tb_video
+    <set >
+      <if test="videoname != null" >
+        videoName = #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="videourl != null" >
+        videoUrl = #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huamai.entity.VideoData" >
+    update tb_video
+    set videoName = #{videoname,jdbcType=VARCHAR},
+      videoUrl = #{videourl,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

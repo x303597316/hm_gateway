@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.RecruitMapper" >
+    <resultMap id="BaseResultMap" type="com.huamai.entity.Recruit" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="job" property="job" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="number" property="number" jdbcType="INTEGER" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="workReatment" property="workreatment" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+        <result column="requirement" property="requirement" jdbcType="VARCHAR" />
+        <result column="validityTime" property="validitytime" jdbcType="VARCHAR" />
+        <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, job, department, number, address, workReatment, type, create_time, update_time, 
+        requirement, validityTime, contacts, mobile, url
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tab_recruit
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tab_recruit
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.huamai.entity.Recruit" >
+        insert into tab_recruit (id, job, department, 
+            number, address, workReatment, 
+            type, create_time, update_time, 
+            requirement, validityTime, contacts, 
+            mobile, url)
+        values (#{id,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+            #{number,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{workreatment,jdbcType=VARCHAR}, 
+            #{type,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+            #{requirement,jdbcType=VARCHAR}, #{validitytime,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+            #{mobile,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+        <selectKey resultType="Integer" keyProperty="id"> 
+			<![CDATA[SELECT LAST_INSERT_ID() AS id ]]>
+		</selectKey>
+    </insert>
+    <insert id="insertSelective" parameterType="com.huamai.entity.Recruit" >
+        insert into tab_recruit
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="job != null" >
+                job,
+            </if>
+            <if test="department != null" >
+                department,
+            </if>
+            <if test="number != null" >
+                number,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="workreatment != null" >
+                workReatment,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="requirement != null" >
+                requirement,
+            </if>
+            <if test="validitytime != null" >
+                validityTime,
+            </if>
+            <if test="contacts != null" >
+                contacts,
+            </if>
+            <if test="mobile != null" >
+                mobile,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="job != null" >
+                #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null" >
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="workreatment != null" >
+                #{workreatment,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="requirement != null" >
+                #{requirement,jdbcType=VARCHAR},
+            </if>
+            <if test="validitytime != null" >
+                #{validitytime,jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null" >
+                #{contacts,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                #{url,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        <selectKey resultType="Integer" keyProperty="id"> 
+			<![CDATA[SELECT LAST_INSERT_ID() AS id ]]>
+		</selectKey>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huamai.entity.Recruit" >
+        update tab_recruit
+        <set >
+            <if test="job != null" >
+                job = #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null" >
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="workreatment != null" >
+                workReatment = #{workreatment,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="requirement != null" >
+                requirement = #{requirement,jdbcType=VARCHAR},
+            </if>
+            <if test="validitytime != null" >
+                validityTime = #{validitytime,jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null" >
+                contacts = #{contacts,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null" >
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huamai.entity.Recruit" >
+        update tab_recruit
+        set job = #{job,jdbcType=VARCHAR},
+            department = #{department,jdbcType=VARCHAR},
+            number = #{number,jdbcType=INTEGER},
+            address = #{address,jdbcType=VARCHAR},
+            workReatment = #{workreatment,jdbcType=VARCHAR},
+            type = #{type,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=VARCHAR},
+            requirement = #{requirement,jdbcType=VARCHAR},
+            validityTime = #{validitytime,jdbcType=VARCHAR},
+            contacts = #{contacts,jdbcType=VARCHAR},
+            mobile = #{mobile,jdbcType=VARCHAR},
+            url = #{url,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    
+    <select id="recruitList" parameterType="map" resultMap="BaseResultMap">
+<!--     	select * from tab_recruit  -->
+<!-- 		<where> -->
+<!-- 			<if test="job != null and job != '' " > -->
+<!--                 job = #{job,jdbcType=VARCHAR} and -->
+<!--             </if> -->
+<!--             <if test="type != null" > -->
+<!--                 type = #{type,jdbcType=INTEGER} -->
+<!--             </if> -->
+<!-- 		</where> -->
+<!-- 	order by id desc -->
+	SELECT
+		a.*
+	FROM
+		(SELECT recruit.* FROM tab_recruit recruit 
+		<where>
+			<if test="job != null and job != '' " >
+                job = #{job,jdbcType=VARCHAR} 
+            </if>
+            <if test="type != null" >
+              and  type = #{type,jdbcType=INTEGER}
+            </if>
+		</where>) a
+	WHERE
+	 	a.validityTime = "" or a.validityTime = null
+		or date_add(a.create_time,interval a.validityTime day) > NOW() 
+	 	ORDER BY id DESC
+    </select>
+</mapper>

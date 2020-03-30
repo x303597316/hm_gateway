@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.Menu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="url_path" property="urlPath" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="ranking" property="ranking" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="TreeResultMap" type="com.huamai.dto.TreeNodeS" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="parent_id" property="pId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url_path" property="url" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="description" property="title" jdbcType="VARCHAR" />
+    <result column="open" property="open" jdbcType="BIT" />
+    <result column="checked" property="checked" jdbcType="BIT" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, menu_name, url_path, icon, parent_id, ranking, create_time, create_user, status, is_delete
+  </sql>
+  
+  <select id="getChildList" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	SELECT id from sys_menu  where FIND_IN_SET(id, getChildList(#{id}))
+  </select>
+  
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from sys_menu
+  	where id=${id}
+  </select>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from sys_menu
+  	where menu_name=#{name}
+  </select>
+  
+  <select id="selectByTerm" parameterType="map" resultMap="BaseResultMap">
+  	select
+  	sm.id, sm.menu_name, sm.url_path, sm.icon, sm.parent_id, sm.ranking, sm.create_time, su.real_name as create_user, sm.status, sm.is_delete
+  	from sys_menu sm
+    left join sys_user su on sm.create_user=su.id
+  	<where>
+  		<if test="term!=null">
+  		and sm.menu_name like '%${term}%'
+  		</if>
+  		and sm.is_delete = 1
+  	</where>
+  </select>
+  
+  <select id="getMenuTreeByRole" parameterType="map" resultMap="TreeResultMap">
+  	<if test="flag!=null and flag==false">
+  	select  DISTINCT sm.id,sm.menu_name as name, sm.parent_id,sm.icon ,sm.url_path
+  	</if>
+  	<if test="flag!=null and flag==true">
+  	select  DISTINCT sm.id,sm.menu_name as name, sm.parent_id
+  	</if>
+  	<if test="flag!=null and flag==true">
+	  ,(CASE WHEN (SELECT srm.id FROM sys_role_menu srm WHERE srm.menu_id=sm.id
+	    AND srm.role_id=#{rid})
+		is NULL THEN 0
+		ELSE 1 END) AS checked,1 as open
+	</if>
+	from sys_menu sm
+	<if test="flag!=null and flag==false">
+	left join sys_role_menu srm2 on srm2.menu_id=sm.id
+	</if>
+	where sm.status=1 and sm.is_delete=1
+	<if test="flag!=null and flag==false">
+		and srm2.role_id=#{rid}
+	</if>
+  </select>
+  
+  <update id="dropUpdate" parameterType="map">
+  	update sys_menu set
+    status=2,
+    is_delete=2 where id in
+	<foreach collection="array" open="(" close=")" separator="," item="item">
+        ${item}
+    </foreach>
+    or parent_id in 
+    <foreach collection="array" open="(" close=")" separator="," item="item">
+        ${item}
+    </foreach>
+  </update>
+  
+  <delete id="deleteMultiple" parameterType="map">
+    delete t1,t2
+	from sys_menu t1
+	left join sys_role_menu t2 on t1.id=t2.menu_id
+	where t1.id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+  
+  <insert id="insertSelective"  keyProperty="id" useGeneratedKeys="true" parameterType="com.huamai.entity.Menu" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >id,</if>
+      <if test="menuName != null" >menu_name,</if>
+      <if test="urlPath != null" >url_path,</if>
+      <if test="icon != null" >icon,</if>
+      <if test="parentId != null" >parent_id,</if>
+      <if test="ranking != null" >ranking,</if>
+      <if test="createTime != null" >create_time,</if>
+      <if test="createUser != null" >create_user,</if>
+      <if test="status != null" >status,</if>
+      <if test="isDelete != null" >is_delete,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >#{id,jdbcType=INTEGER},</if>
+      <if test="menuName != null" >#{menuName,jdbcType=VARCHAR},</if>
+      <if test="urlPath != null" >#{urlPath,jdbcType=VARCHAR},</if>
+      <if test="icon != null" >#{icon,jdbcType=VARCHAR},</if>
+      <if test="parentId != null" >#{parentId,jdbcType=INTEGER},</if>
+      <if test="ranking != null" >#{ranking,jdbcType=INTEGER},</if>
+      <if test="createTime != null" >#{createTime,jdbcType=VARCHAR},</if>
+      <if test="createUser != null" >#{createUser,jdbcType=VARCHAR},</if>
+      <if test="status != null" >#{status,jdbcType=INTEGER},</if>
+      <if test="isDelete != null" >#{isDelete,jdbcType=INTEGER},</if>
+    </trim>
+  </insert>
+  
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huamai.dao.DivDao">
+	<!-- 插入 -->
+	<insert id="insertDiv" parameterType="java.util.Map">
+		insert into tb_div
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="div_image != null and div_image !=''">div_image,</if>
+			<if test="div_name != null and div_name !=''">div_name,</if>
+			<if test="div_position != null and div_position !=''"> div_position,</if>
+			<if test="div_status != null and div_status !=''">div_status,</if>
+			<if test="div_updatetime != null and div_updatetime !=''">div_updatetime,</if>
+			<if test="div_href != null and div_href !=''">div_href,</if>
+			<if test="div_content != null and div_content !=''">div_content,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="div_image != null and div_image !=''">#{div_image},</if>
+			<if test="div_name != null and div_name !=''">#{div_name},</if>
+			<if test="div_position != null and div_position !=''">#{div_position},</if>
+			<if test="div_status != null and div_status !=''">#{div_status},</if>
+			<if test="div_updatetime != null and div_updatetime !=''">#{div_updatetime},</if>
+			<if test="div_href != null and div_href !=''">#{div_href},</if>
+			<if test="div_content != null and div_content !=''">#{div_content},</if>
+		</trim>
+	</insert>
+	<update id="updateDiv" parameterType="java.util.Map">
+		update tb_div
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="div_image != null and div_image !=''">div_image= #{div_image},</if>
+			<if test="div_name != null and div_name !=''">div_name= #{div_name},</if>
+			<if test="div_position != null and div_position !=''">div_position= #{div_position},</if>
+			<if test="div_status != null and div_status !=''">div_status= #{div_status},</if>
+			<if test="div_href != null and div_href !=''">div_href= #{div_href},</if>
+			<if test="div_content != null and div_content !=''">div_content= #{div_content},</if>
+			<if test="div_updatetime != null and div_updatetime !=''">div_updatetime= #{div_updatetime},</if>
+		</trim>
+		where div_id = #{div_id}
+	</update>
+	<select id="getDivList" parameterType="java.util.Map" resultType="com.huamai.entity.Div">
+	 select * from tb_div where 1=1 
+	 <if test="div_id != null and div_id !=''">and div_id = #{div_id}</if>
+	 <if test="div_position != null and div_position !=''">and div_position = #{div_position}</if>
+	 <if test="div_updatetime != null and div_updatetime !=''">and div_updatetime like concat(#{div_updatetime},'%')</if>
+	 <if test="div_name != null and div_name !=''">and div_name like concat(concat('%',#{div_name}),'%')</if>
+	</select>
+	
+	<select id="selectById" resultType="com.huamai.entity.Div" parameterType="java.lang.Integer" >
+    select * from tb_div
+    where div_id = #{div_id,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteDiv" parameterType="java.lang.Integer">
+     delete from tb_div where div_id = #{div_id,jdbcType=INTEGER}
+    </delete>
+    
+    <select id="getDivByStatus" parameterType="java.util.Map" resultType="com.huamai.entity.Div">
+	 SELECT * FROM tb_div 
+	 <if test="div_status != null and div_status !=''">where div_status = #{div_status}  order by  div_updatetime DESC</if>
+	</select>
+</mapper>

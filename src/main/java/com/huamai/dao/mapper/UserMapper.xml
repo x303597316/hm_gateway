@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, password, real_name, sex, phone, email, role, create_time, create_user, status,
+    is_delete
+  </sql>
+  
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from sys_user
+  	where id=${id}
+  </select>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from sys_user
+  	where user_name=#{userName}
+  	and status=1 and is_delete=1
+  </select>
+  
+  <select id="selectByTerm" parameterType="map" resultMap="BaseResultMap">
+  	select
+  	su.id, su.user_name, su.password, su.real_name, su.sex, su.phone, su.email, su.create_time, su2.real_name as create_user, su.status,su.is_delete
+  	, sr.role_name as role
+  	from sys_user su
+  	left join sys_role sr on sr.id=su.role 
+    left join sys_user su2 on su.create_user=su2.id
+  	<where>
+  		and su.user_name <![CDATA[!=]]> 'admin'
+  		<if test="term!=null">
+  		and (su.user_name like '%${term}%' 
+  		or su.real_name like '%${term}%'
+  		or su.phone like '%${term}%')
+  		</if>
+  		<if test="role!=null and role!=''">
+  		and su.role=#{role}
+  		</if>
+  		and su.is_delete = 1
+  	</where>
+  </select>
+  
+  <update id="dropUpdate" parameterType="map">
+  	update sys_user set
+    status=2,
+    is_delete=2 where id in
+	<foreach collection="array" open="(" close=")" separator="," item="item">
+        ${item}
+    </foreach>
+  </update>
+  
+</mapper>

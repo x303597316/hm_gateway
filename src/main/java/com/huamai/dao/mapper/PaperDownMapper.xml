@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.PaperDownDao" >
+
+
+  <select id="selectAllPaper" resultType="map" parameterType="java.util.Map">
+  	select  *  from
+    tb_paper_download
+    <where>
+   	<if test="paperName != null  and paperName != ''">and paperName like '%${paperName}%'</if>
+
+    </where>
+    order by updateTime  desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from tb_paper_download
+    where id = #{id}
+
+  </delete>
+
+
+  <insert id="insertSelective" parameterType="map">
+    insert into tb_paper_download
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null and id !='' ">id,</if>
+      <if test="paperSize != null and paperSize !=''">paperSize,</if>
+      <if test="paperName != null and paperName !=''">paperName,</if>
+      <if test="createTime != null and createTime !=''">createTime,</if>
+      <if test="updateTime != null and updateTime !=''">updateTime,</if>
+      <if test="paperType != null and paperType !=''">paperType,</if>
+      <if test="introduce != null and introduce !=''">introduce,</if>
+      <if test="paperUrl != null and paperUrl !=''">paperUrl,</if>
+      <if test="title != null and title !=''">title,</if>
+      <if test="parperContent != null and parperContent !=''">parperContent</if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null and id !='' ">#{id},</if>
+      <if test="paperSize != null and paperSize !=''">#{paperSize},</if>
+      <if test="paperName != null and paperName !=''">#{paperName},</if>
+      <if test="createTime != null and createTime !=''">#{createTime},</if>
+
+      <if test="updateTime != null and updateTime !=''">#{updateTime},</if>
+      <if test="paperType != null and paperType !=''">#{paperType},</if>
+      <if test="introduce != null and introduce !=''">#{introduce},</if>
+      <if test="paperUrl != null and paperUrl !=''">#{paperUrl},</if>
+      <if test="title != null and title !=''">#{title},</if>
+      <if test="parperContent != null and parperContent !=''">#{parperContent}</if>
+
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="java.util.Map">
+    update tb_paper_download
+
+    <set>
+      <if test="paperSize != null and paperSize !=''">paperSize = #{paperSize},</if>
+      <if test="paperName != null and paperName !=''">paperName = #{paperName},</if>
+      <if test="createTime != null and createTime !=''">createTime = #{createTime},</if>
+      <if test="updateTime != null and updateTime !=''">updateTime = #{updateTime},</if>
+      <if test="paperType != null and paperType !=''">paperType=#{paperType},</if>
+      <if test="introduce != null and introduce !=''">introduce=#{introduce},</if>
+      <if test="paperUrl != null and paperUrl !=''">paperUrl=#{paperUrl},</if>
+      <if test="title != null and title !=''">title=#{title},</if>
+      <if test="parperContent != null and parperContent !=''">parperContent=#{parperContent}</if>
+
+    </set>
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="hashmap" resultType="hashmap" >
+    select *
+    from  tb_paper_download
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+
+</mapper>

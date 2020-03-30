@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.SolutionMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.Solution" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="solutionName" property="solutionname" jdbcType="VARCHAR" />
+    <result column="titleImg" property="titleimg" jdbcType="VARCHAR" />
+    <result column="relationId" property="relationid" jdbcType="VARCHAR" />
+    <result column="present" property="present" jdbcType="VARCHAR" />
+    <result column="Type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.huamai.entity.Solution" extends="BaseResultMap" >
+    <result column="textContent" property="textcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, solutionName, titleImg, relationId, present,Type
+  </sql>
+  <sql id="Blob_Column_List" >
+    textContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_solution
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_solution
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huamai.entity.Solution" >
+    insert into tb_solution (id, solutionName, titleImg, 
+      relationId, present, Type, textContent
+      )
+    values (#{id,jdbcType=INTEGER}, #{solutionname,jdbcType=VARCHAR}, #{titleimg,jdbcType=VARCHAR}, 
+      #{relationid,jdbcType=VARCHAR}, #{present,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{textcontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huamai.entity.Solution" >
+    insert into tb_solution
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="solutionname != null" >
+        solutionName,
+      </if>
+      <if test="titleimg != null" >
+        titleImg,
+      </if>
+      <if test="relationid != null" >
+        relationId,
+      </if>
+      <if test="present != null" >
+        present,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="textcontent != null" >
+        textContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="solutionname != null" >
+        #{solutionname,jdbcType=VARCHAR},
+      </if>
+      <if test="titleimg != null" >
+        #{titleimg,jdbcType=VARCHAR},
+      </if>
+      <if test="relationid != null" >
+        #{relationid,jdbcType=VARCHAR},
+      </if>
+      <if test="present != null" >
+        #{present,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="textcontent != null" >
+        #{textcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huamai.entity.Solution" >
+    update tb_solution
+    <set >
+      <if test="solutionname != null" >
+        solutionName = #{solutionname,jdbcType=VARCHAR},
+      </if>
+      <if test="titleimg != null" >
+        titleImg = #{titleimg,jdbcType=VARCHAR},
+      </if>
+      <if test="relationid != null" >
+        relationId = #{relationid,jdbcType=VARCHAR},
+      </if>
+      <if test="present != null" >
+        present = #{present,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="textcontent != null" >
+        textContent = #{textcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huamai.entity.Solution" >
+    update tb_solution
+    set solutionName = #{solutionname,jdbcType=VARCHAR},
+      titleImg = #{titleimg,jdbcType=VARCHAR},
+      relationId = #{relationid,jdbcType=VARCHAR},
+      present = #{present,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR},
+      textContent = #{textcontent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huamai.entity.Solution" >
+    update tb_solution
+    set solutionName = #{solutionname,jdbcType=VARCHAR},
+      titleImg = #{titleimg,jdbcType=VARCHAR},
+      relationId = #{relationid,jdbcType=VARCHAR},
+      present = #{present,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR} 
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectList" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select * from tb_solution 
+  	<where>
+  	<if test="clike != null and clike != '' ">solutionName like CONCAT('%',#{clike},'%')</if>
+  	</where>
+  </select>
+  <select id="selectListByType" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select * from tb_solution where Type = #{type,jdbcType=VARCHAR} 
+  </select>
+</mapper>

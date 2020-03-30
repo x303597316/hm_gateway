@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0; }
+
+html, body {
+  font: 'Microsoft YaHei';
+  width: 100%;
+ }
+
+em, i {
+  font-style: normal; }
+
+ul, li {
+  list-style-type: none; }
+
+strong {
+  font-weight: normal; }
+
+a {
+  text-decoration: none;
+  color: #969696;
+  font-family: 'Microsoft YaHei'; }
+
+a:hover {
+  text-decoration: none; }
+
+.box {
+  width: 100%;
+  min-width: 1200px;
+  height: auto;
+  overflow: hidden; }
+.container{
+  min-width: 1200px;
+}
+.banner {
+  width: 100%;
+  min-width: 1200px;
+  height: 337px;
+  overflow: hidden;
+  background: url("../images/zjhmban.png") no-repeat;
+  background-size: 100% 100%; }
+.box .banner .banner1{
+   min-width: 1200px;
+}
+
+.contert {
+  min-width: 1200px; }
+
+.contert .row {
+  margin: 0;
+  padding: 0; 
+  }
+  .contert .row .right {
+/*     width: 970px; */
+    float: left;
+    margin: 0;
+    padding: 0; }
+    .contert .row .right .tit{
+       margin-top:66px;
+    }
+ .contert .row .right h1{
+    font-size: 25px;
+    width:100%;
+    height:35px;
+    line-height: 35px;
+    text-align:center;
+    color:#900101;
+    font-weight: 600;
+
+ } 
+ .contert .row .right .zlcon{
+    width:760px;
+    height:542px;
+    margin-left: 66px;
+    margin-top: 40px;
+ }
+ .contert .row .right .zlcon p a span{
+    float:right;
+ }
+ .contert .row .right .fypage{
+    width:320px;
+    height:50px;
+    margin-left: 375px;
+ }
+ .contert .row .right .fypage .left{
+    float:left;
+    width:20px;
+    height:20px;
+ }
+ .contert .row .right .fypage .right{
+    float:left;
+    width:20px;
+    height:20px;
+ }
+ .contert .row .right .fypage ul{
+    height:30px;
+    float: left;
+ }
+ .contert .row .right .fypage ul li{
+    float:left;
+    width:30px;
+    height:30px;
+    text-align: center; }
+  .contert .row .right .fypage ul .sl{
+     width:60px;
+  }
+ .contert .row .right .gjr{
+    width:100%;
+    height:370px;
+ }  
+  .contert .row .right p{
+    margin-left: 24px;
+    margin-right: 24px;
+    line-height: 20px;
+    font-size: 16px;
+    margin-top: 10px;
+
+  }
+  .contert .row .right .zxjf{
+    width:100%;
+    height: 120px;
+    border-top:2px solid #aaaaaa;
+    margin-top: 28px;
+  }
+  .contert .row .right .zxjf h4{
+    margin-left: 24px;
+    color:#900101;
+    margin-top:28px;
+  }
+  .contert .row .right .zxjf a{
+    float:right;
+    color:#992727;
+    margin-top:20px;
+    margin-right:24px;
+  }
+.hmfir {
+  width:230px;
+  height: 780px;
+  background: #f6f6f6;
+  margin: 0;
+  padding: 0;
+  float: left; }
+  .hmfir .title {
+    margin-top: 34px;
+    font-size: 20px; }
+    .hmfir .title a {
+      margin-left: 10px;
+      margin-right: 10px;
+      color: #434343;
+      font-size: 16px; }
+    .hmfir .title span {
+      margin-left: 15px;
+      font-size: 18px;
+      color: #434343; }
+      .hmfir .snw{
+          margin-top: 7px;
+   		 margin-left: 35px;
+      }
+      .hmfir .snw p{
+        line-height: 35px;
+      }
+  .hmfir .hmzj {
+    margin-left: 10px;
+    margin-top: -4px;
+    margin-right: -21px; 
+      width: 29px;
+    height: 26px;
+    
+    }
+.download{
+	margin-left: 25px;
+	margin-top: 10px
+}    

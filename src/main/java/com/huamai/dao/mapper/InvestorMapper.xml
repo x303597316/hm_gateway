@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huamai.dao.InvestorMapper" >
+  <resultMap id="BaseResultMap" type="com.huamai.entity.Investor" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="contentName" property="contentname" jdbcType="VARCHAR" />
+    <result column="titleImg" property="titleimg" jdbcType="VARCHAR" />
+    <result column="textContent" property="textcontent" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+     
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, contentName, titleImg, textContent, type, createtime,details
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_investor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_investor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huamai.entity.Investor" >
+    insert into tb_investor (id, contentName, titleImg, 
+      textContent, type, createtime,details
+      )
+    values (#{id,jdbcType=INTEGER}, #{contentname,jdbcType=VARCHAR}, #{titleimg,jdbcType=VARCHAR}, 
+      #{textcontent,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{createtime,jdbcType=VARCHAR},#{details,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huamai.entity.Investor" >
+    insert into tb_investor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="contentname != null" >
+        contentName,
+      </if>
+      <if test="titleimg != null" >
+        titleImg,
+      </if>
+      <if test="textcontent != null" >
+        textContent,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contentname != null" >
+        #{contentname,jdbcType=VARCHAR},
+      </if>
+      <if test="titleimg != null" >
+        #{titleimg,jdbcType=VARCHAR},
+      </if>
+      <if test="textcontent != null" >
+        #{textcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huamai.entity.Investor" >
+    update tb_investor
+    <set >
+      <if test="contentname != null" >
+        contentName = #{contentname,jdbcType=VARCHAR},
+      </if>
+      <if test="titleimg != null" >
+        titleImg = #{titleimg,jdbcType=VARCHAR},
+      </if>
+      <if test="textcontent != null" >
+        textContent = #{textcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huamai.entity.Investor" >
+    update tb_investor
+    set contentName = #{contentname,jdbcType=VARCHAR},
+      titleImg = #{titleimg,jdbcType=VARCHAR},
+      textContent = #{textcontent,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+       details = #{details,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="InvestorList" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select * from tb_investor where 1=1 
+  	<if test="contentname !=null and contentname != '' ">and contentName = #{contentname}</if>
+  	<if test="type !=null and type != '' ">and type = #{type}</if>
+  	<if test="start !=null and start != '' ">and str_to_date(createtime,'%Y-%m-%d') <![CDATA[>= ]]>str_to_date(#{start}, '%Y-%m-%d') </if>
+   	<if test="end !=null and end != '' ">and str_to_date(createtime,'%Y-%m-%d') <![CDATA[<= ]]> str_to_date(#{end}, '%Y-%m-%d')</if>
+  </select>
+  
+  <select id="getInvestorList" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select * from tb_investor where 1=1 
+  	<if test="contentname !=null and contentname != '' ">and contentName = #{contentname}</if>
+  	<if test="type !=null and type != '' ">and type = #{type}</if>
+  	limit #{pagenum},#{size}
+  </select>
+  
+  <select id="getInvestorCount" parameterType="java.util.Map" resultType="int">
+  	select count(*) from tb_investor where 1=1 
+  	<if test="type !=null and type != '' ">and type = #{type}</if>
+  </select>
+  <select id="getInvestorById" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from tb_investor where 1=1  and id = #{id}
+  	
+  </select>
+</mapper>
