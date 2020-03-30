@@ -10,7 +10,7 @@
   <description>门户网站-后端</description>
   <properties>
 		<!-- spring版本号 -->
-		<spring.version>4.3.3.RELEASE</spring.version>
+		<spring.version>5.2.5.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
 		
